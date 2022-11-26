@@ -16,48 +16,21 @@ getFormInput.forEach((item) => {
     item.nextElementSibling.classList.add("styled");
   });
 
-  item.addEventListener("focusout", () => {
-    if (getFormInputEmailValue === "" && getFormInputPasswordValue === "") {
-      item.nextElementSibling.classList.remove("styled");
+  item.addEventListener("focusout", (e) => {
+    if (e.target.type === "email" && getFormInputEmailValue === "") {
+      e.target.nextElementSibling.classList.remove("styled");
+    } else if (
+      e.target.type === "password" &&
+      getFormInputPasswordValue === ""
+    ) {
+      e.target.nextElementSibling.classList.remove("styled");
     }
   });
 
   item.nextElementSibling.addEventListener("click", () => {
-    item.addEventListener("focus", null);
+    item.focus();
     if (!item.nextElementSibling.classList.contains("styled")) {
       item.nextElementSibling.classList.add("styled");
     }
-  });
-});
-
-window.addEventListener("click", (e) => {
-  getFormInput.forEach((item4) => {
-    window.addEventListener("click", (e) => {
-      if (
-        e.target.tagName != "INPUT" &&
-        e.target.tagName !== item4.nextElementSibling.tagName &&
-        item4.nextElementSibling.classList.contains("styled") &&
-        getFormInputEmailValue === "" &&
-        getFormInputPasswordValue === ""
-      ) {
-        item4.nextElementSibling.classList.remove("styled");
-      } else if (
-        e.target.tagName != "INPUT" &&
-        e.target.tagName !== item4.nextElementSibling.tagName &&
-        item4.nextElementSibling.classList.contains("styled") &&
-        item4.type === "email" &&
-        getFormInputEmailValue === ""
-      ) {
-        item4.nextElementSibling.classList.remove("styled");
-      } else if (
-        e.target.tagName != "INPUT" &&
-        e.target.tagName !== item4.nextElementSibling.tagName &&
-        item4.nextElementSibling.classList.contains("styled") &&
-        item4.type === "password" &&
-        getFormInputPasswordValue === ""
-      ) {
-        item4.nextElementSibling.classList.remove("styled");
-      }
-    });
   });
 });
